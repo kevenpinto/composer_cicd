@@ -105,9 +105,9 @@ deploy: ## Deploy Dags to Your Dev Project -- This Runs your Unit tests first
 	$(call run, \
 	  pytest ${WORKDIR}/tests \
 	  && gsutil -m rsync -r dags/  ${DAG_BUCKET} \
-	  && gsutil rm -rf ${WORKDIR}/dags/__pycache__ \
-	  && gsutil rm -f ${WORKDIR}/dags/.DS_Store \
-	  && gsutil rm -f ${WORKDIR}/dags/*.pyc \
+	  && gsutil rm -rf ${DAG_BUCKET}/__pycache__* \
+	  && gsutil rm -f ${DAG_BUCKET}/.DS_Store* \
+	  && gsutil rm -f ${DAG_BUCKET}/*.pyc 
   )
 
 tests: ## Run your Airflow Unit Tests -- Make sure you run `make init` at least once before running this
